@@ -9,11 +9,11 @@ import java.util.List;
 
 @Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository{
-    private final List<Employee> employeeList = List.of(
-            new Employee("Катя", 90_000),
-            new Employee("Дима", 160_000),
-            new Employee("Олег", 80_000),
-            new Employee("Вика", 165_000));
+    private List<Employee> employeeList = List.of(
+            new Employee(1,"Катя", 90_000),
+            new Employee(2,"Дима", 160_000),
+            new Employee(3,"Олег", 80_000),
+            new Employee(4,"Вика", 165_000));
 
     @Override
     public List<Employee> getAllEmployees() {
@@ -61,5 +61,53 @@ public class EmployeeRepositoryImpl implements EmployeeRepository{
             }
         }
         return medianList;
+    }
+
+    @Override
+    public Employee getEmpById(int id){
+        for(Employee empl : employeeList) {
+            if(empl.getId()==(id)) {
+                return empl;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Employee> getEmployeesWithSalaryHigherThan(Integer compareSalary){
+        List<Employee> empList = new ArrayList<>();
+        for(Employee emp : employeeList){
+            if(emp.getSalary()>compareSalary){
+                empList.add(emp);
+            }
+        }
+        return empList;
+    }
+
+    @Override
+    public void deleteEmpById(int id){
+        Employee delEmpl = null;
+        for(Employee empl : employeeList) {
+            if(empl.getId()==(id)) {
+                delEmpl = empl;
+            }
+        }
+        employeeList.remove(delEmpl);
+    }
+
+    @Override
+    public void createEmployee(List<Employee> employee){
+        employeeList.addAll(employee);
+    }
+
+    @Override
+    public void updateEmployee(int id, Employee employee){
+        int i = 0;
+        for(Employee empl : employeeList) {
+            if(empl.getId()==(id)) {
+                employeeList.set(i,employee);
+            }
+            i++;
+        }
     }
 }

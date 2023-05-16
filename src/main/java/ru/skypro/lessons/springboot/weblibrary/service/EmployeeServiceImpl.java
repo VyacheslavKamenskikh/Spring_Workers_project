@@ -1,6 +1,8 @@
 package ru.skypro.lessons.springboot.weblibrary.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.skypro.lessons.springboot.weblibrary.pojo.Employee;
 import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeRepository;
 
@@ -34,4 +36,26 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> getHighS(){
         return employeeRepository.getHighS();
     };
+    public Employee getEmpById(int id) {
+        return employeeRepository.getEmpById(id);
+    }
+
+    public List<Employee> getEmployeesWithSalaryHigherThan(Integer compareSalary) {
+        return employeeRepository.getEmployeesWithSalaryHigherThan(compareSalary);
+    }
+
+    @Override
+    public void deleteEmpById(int id) {
+        employeeRepository.getEmpById(id);
+    }
+
+    @Override
+    public void createEmployee(List<Employee> employee){
+        employeeRepository.createEmployee(employee);
+    }
+
+    @Override
+    public void updateEmployee(int id, Employee employee) {
+        employeeRepository.updateEmployee(id, employee);
+    }
 }
