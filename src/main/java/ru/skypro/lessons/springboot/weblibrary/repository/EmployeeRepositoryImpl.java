@@ -8,8 +8,9 @@ import java.util.Comparator;
 import java.util.List;
 
 @Repository
-public class EmployeeRepositoryImpl implements EmployeeRepository{
-    private List<Employee> employeeList = List.of(
+public class EmployeeRepositoryImpl{
+
+   /* private List<Employee> employeeList = List.of(
             new Employee(1,"Катя", 90_000),
             new Employee(2,"Дима", 160_000),
             new Employee(3,"Олег", 80_000),
@@ -61,7 +62,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository{
             }
         }
         return medianList;
-    }
+   }
 
     @Override
     public Employee getEmpById(int id){
@@ -109,5 +110,5 @@ public class EmployeeRepositoryImpl implements EmployeeRepository{
             }
             i++;
         }
-    }
+    }*/
 }

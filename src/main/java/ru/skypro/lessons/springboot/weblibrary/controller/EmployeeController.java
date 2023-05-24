@@ -2,6 +2,8 @@ package ru.skypro.lessons.springboot.weblibrary.controller;
 
 
 import org.springframework.web.bind.annotation.*;
+import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeDTO;
+import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibrary.pojo.Employee;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeService;
 
@@ -16,11 +18,32 @@ public class EmployeeController {
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-
     @GetMapping
-    public List<Employee> showCounter() {
-        return employeeService.getAllEmployees();
+    public List<EmployeeFullInfo> getEmployees() {
+        return employeeService.getAllInfo();
     }
+    @GetMapping("/{id}/fullInfo")
+    public Employee findById(@PathVariable int id) {
+        return employeeService.findEmpById(id);
+    }
+
+    @GetMapping("/withHighestSalary")
+    public List<EmployeeDTO> findHighest() {
+        return employeeService.findHighest();
+    }
+    @GetMapping("/")
+    public List<EmployeeFullInfo> findByPos(@RequestParam("position") String position) {
+        return employeeService.findByPos(position);
+    }
+    @GetMapping("/page")
+    public List<Employee> findByPos(@RequestParam("page") int page) {
+        return employeeService.getEmployeeWithPaging(page);
+    }
+    @PostMapping("/create")
+    public void addEmployee(@RequestBody Employee employee) {
+        employeeService.addEmployee(employee);
+    }
+    /*
     @GetMapping("/salary/sum")
     public int showSum() {
         return employeeService.getSum();
@@ -60,5 +83,5 @@ public class EmployeeController {
     @PostMapping("/{id}")
     public void updateEmployee(@PathVariable int id,@RequestBody Employee employee) {
         employeeService.updateEmployee(id,employee);
-    }
+    }*/
 }
