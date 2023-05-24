@@ -2,7 +2,7 @@ package ru.skypro.lessons.springboot.weblibrary.dto;
 
 import lombok.*;
 import lombok.experimental.Accessors;
-import ru.skypro.lessons.springboot.weblibrary.pojo.Employee;
+import ru.skypro.lessons.springboot.weblibrary.entity.Employee;
 
 @Data
 @AllArgsConstructor

@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeFullInfo;
-import ru.skypro.lessons.springboot.weblibrary.pojo.Employee;
+import ru.skypro.lessons.springboot.weblibrary.entity.Employee;
 import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeRepository;
 import ru.skypro.lessons.springboot.weblibrary.repository.PagingRepository;
 

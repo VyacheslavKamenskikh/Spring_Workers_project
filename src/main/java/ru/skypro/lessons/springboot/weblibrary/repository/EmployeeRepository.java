@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeFullInfo;
-import ru.skypro.lessons.springboot.weblibrary.pojo.Employee;
+import ru.skypro.lessons.springboot.weblibrary.entity.Employee;
 
 import java.util.List;
 
