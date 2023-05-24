@@ -25,19 +25,5 @@ public interface EmployeeService {
 
 
 
-   /*
-    int getSum();
-    Employee getMin();
-    Employee getMax();
-    List<Employee> getHighS();
 
-    Employee getEmpById(int id);
-    List<Employee> getEmployeesWithSalaryHigherThan(Integer compareSalary);
-
-    void deleteEmpById(int id);
-
-
-    void createEmployee(List<Employee> employee);
-
-    void updateEmployee(int id, Employee employee);*/
 }

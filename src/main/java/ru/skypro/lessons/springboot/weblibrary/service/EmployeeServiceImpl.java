@@ -69,46 +69,4 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 
-
-   /* public List<Employee> getAllEmployees() {
-        return employeeRepository.getAllEmployees();
-    }
-
-    public int getSum() {
-        return employeeRepository.getSum();
-    }
-
-    public Employee getMin() {
-        return employeeRepository.getMin();
-    }
-
-    public Employee getMax() {
-        return employeeRepository.getMax();
-    }
-
-    public List<Employee> getHighS(){
-        return employeeRepository.getHighS();
-    };
-    public Employee getEmpById(int id) {
-        return employeeRepository.getEmpById(id);
-    }
-
-    public List<Employee> getEmployeesWithSalaryHigherThan(Integer compareSalary) {
-        return employeeRepository.getEmployeesWithSalaryHigherThan(compareSalary);
-    }
-
-    @Override
-    public void deleteEmpById(int id) {
-        employeeRepository.getEmpById(id);
-    }
-
-    @Override
-    public void createEmployee(List<Employee> employee){
-        employeeRepository.createEmployee(employee);
-    }
-
-    @Override
-    public void updateEmployee(int id, Employee employee) {
-        employeeRepository.updateEmployee(id, employee);
-    }*/
 }

@@ -26,20 +26,5 @@ public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
             "WHERE e.position = :position")
     List<EmployeeFullInfo> findByPos(@Param("position") String position);
 
-   /* public List<Employee> getAllEmployees();
-    public int getSum();
-    Employee getMin();
-    Employee getMax();
 
-    public List<Employee> getHighS();
-
-    Employee getEmpById(int id);
-
-    List<Employee> getEmployeesWithSalaryHigherThan(Integer compareSalary);
-
-    void deleteEmpById(int id);
-
-    void createEmployee(List<Employee> employee);
-
-    void updateEmployee(int id, Employee employee);*/
 }
