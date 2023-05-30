@@ -4,12 +4,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibrary.entity.Employee;
 import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeRepository;
 import ru.skypro.lessons.springboot.weblibrary.repository.PagingRepository;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +68,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<EmployeeFullInfo> findByPos(String position) {
         return employeeRepository.findByPos(position);
+    }
+
+    @Override
+    public void uploadEmployee(MultipartFile file) throws IOException {
+        employeeRepository.uploadEmployee(file);
     }
 
 
