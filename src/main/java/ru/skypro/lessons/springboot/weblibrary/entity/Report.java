@@ -24,6 +24,15 @@ public class Report implements Serializable {
     private int maxSal;
     private int minSal;
     private int medSal;
+
+    public Report(String p, int numEmp, int maxSal, int minSal, int medianSal) {
+        this.name = p;
+        this.numEmpl = numEmp;
+        this.maxSal = maxSal;
+        this.minSal = minSal;
+        this.medSal = medianSal;
+    }
+
     @Override
     public String toString() {
         return "{" +

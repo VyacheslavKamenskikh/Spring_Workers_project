@@ -4,8 +4,10 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibrary.entity.Employee;
+import ru.skypro.lessons.springboot.weblibrary.entity.Report;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public interface EmployeeService {
@@ -28,4 +30,8 @@ public interface EmployeeService {
 
 
    void uploadEmployee(MultipartFile file) throws IOException;
+
+   int addReport() throws SQLException, IOException;
+
+   Report getReportbyId(int id) throws SQLException;
 }

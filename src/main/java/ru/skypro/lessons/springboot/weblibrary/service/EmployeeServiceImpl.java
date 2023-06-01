@@ -8,10 +8,12 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibrary.entity.Employee;
+import ru.skypro.lessons.springboot.weblibrary.entity.Report;
 import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeRepository;
 import ru.skypro.lessons.springboot.weblibrary.repository.PagingRepository;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +75,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void uploadEmployee(MultipartFile file) throws IOException {
         employeeRepository.uploadEmployee(file);
+    }
+
+    @Override
+    public int addReport() throws SQLException, IOException {
+        return employeeRepository.addReport();
+    }
+
+    @Override
+    public Report getReportbyId(int id) throws SQLException {
+        return employeeRepository.getReportbyId(id);
     }
 
 
