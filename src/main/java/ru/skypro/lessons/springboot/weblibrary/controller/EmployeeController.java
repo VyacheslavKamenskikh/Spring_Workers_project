@@ -42,14 +42,5 @@ public class EmployeeController {
     public List<Employee> findByPos(@RequestParam("page") int page) {
         return employeeService.getEmployeeWithPaging(page);
     }
-    @PostMapping("/create")
-    public void addEmployee(@RequestBody Employee employee) {
-        employeeService.addEmployee(employee);
-    }
-
-    @PostMapping(value = "/upload" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
-        employeeService.uploadEmployee(file);
-    }
 
 }
