@@ -14,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Report implements Serializable {
+public class Report{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

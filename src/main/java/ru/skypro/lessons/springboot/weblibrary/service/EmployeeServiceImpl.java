@@ -1,5 +1,7 @@
 package ru.skypro.lessons.springboot.weblibrary.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final PagingRepository pagingRepository;
+    private static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
     // Создаем конструктор, который принимает репозиторий сотрудников
     // Чтобы внедрить зависимость репозитория сотрудников в данный сервис
     public EmployeeServiceImpl(EmployeeRepository employeeRepository,PagingRepository pagingRepository) {
@@ -38,9 +41,9 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .toList();
     }
 
-    List<Employee> res = new ArrayList<>();
-    List<Employee> res2 = new ArrayList<>();
+
     public List<EmployeeDTO> getAllEmployees(){
+        List<Employee> res = new ArrayList<>();
         employeeRepository.findAll().forEach(res::add);
         return res.stream().map(EmployeeDTO::fromEmployee).toList();
     }
@@ -53,11 +56,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void addEmployee(Employee employee) {
         employeeRepository.save(employee);
+        logger.info("Was invoked method for create employee " + employee.toString());
     }
 
     @Override
     public Employee findEmpById(int id) {
-        return employeeRepository.findById(id).get();
+        Employee result = employeeRepository.findById(id).get();
+        if(result.equals(null)){
+            logger.error("There is no employee with id = " + id);
+            return result;
+        }
+        else{
+            return result;
+        }
     }
 
     @Override
