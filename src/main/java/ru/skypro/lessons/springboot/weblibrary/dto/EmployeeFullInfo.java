@@ -19,5 +19,9 @@ public class EmployeeFullInfo {
         this.positionName = positionName;
     }
 
+    public EmployeeFullInfo() {
+
+    }
+
     // Геттеры и сеттеры
 }
