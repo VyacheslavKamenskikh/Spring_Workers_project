@@ -54,4 +54,23 @@ public class EmployeeControllerTest {
         employee.setSalary(new Random().nextInt()*1000);
         return objectMapper.writeValueAsString(employee);
     }
+
+    @SneakyThrows
+    @Test
+    void addEmployeeAndGetEmployeeByIdTest(){
+        final int findId = 22;
+        EmployeeFullInfo employee = new EmployeeFullInfo();
+        employee.setId(22);
+        employee.setSalary(new Random().nextInt()*1000);
+        String jsonEmployee = objectMapper.writeValueAsString(employee);
+
+        mockMvc.perform(post(EMPLOYEES_URL).contentType(MediaType.APPLICATION_JSON).content(jsonEmployee)).andExpect(status().isOk());
+        mockMvc.perform(get(EMPLOYEES_URL+"/{id}/fullInfo").param("id", findId)).andExpect(jsonPath("$[0].id").);
+    }
+
+    @SneakyThrows
+    @Test
+    void GetEmployeesTest(){
+        mockMvc.perform(get(EMPLOYEES_URL).andExpect(jsonPath());
+    }
 }
