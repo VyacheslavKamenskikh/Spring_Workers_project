@@ -1,5 +1,6 @@
 package ru.skypro.lessons.springboot.weblibrary.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibrary.entity.Employee;
 import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeRepository;
@@ -29,6 +32,9 @@ public class EmployeeControllerTest {
     @Autowired
     EmployeeRepository employeeRepository;
 
+    @Autowired
+    ObjectMapper objectMapper;
+
     @BeforeEach
     void cleanDate(){
         employeeRepository.deleteAll();
@@ -43,8 +49,8 @@ public class EmployeeControllerTest {
         employee.setSalary(new Random().nextInt()*1000);
         String jsonEmployee = objectMapper.writeValueAsString(employee);
 
-        mockMvc.perform(post(EMPLOYEES_URL).contentType(MediaType.APPLICATION_JSON).content(jsonEmployee)).andExpect(status().isOk());
-        mockMvc.perform(get(EMPLOYEES_URL).param("position", pos)).andExpect(jsonPath("$[0].position").);
+        mockMvc.perform(post(EMPLOYEES_URL).contentType(MediaType.APPLICATION_JSON).content(jsonEmployee)).andExpect(MockMvcResultMatchers.status().isOk());
+        mockMvc.perform(get(EMPLOYEES_URL).param("position", pos)).andExpect((ResultMatcher) MockMvcResultMatchers.jsonPath("$[0].position"));
     }
 
     @SneakyThrows
@@ -57,20 +63,41 @@ public class EmployeeControllerTest {
 
     @SneakyThrows
     @Test
-    void addEmployeeAndGetEmployeeByIdTest(){
-        final int findId = 22;
+    void addEmployeeTest(){
         EmployeeFullInfo employee = new EmployeeFullInfo();
-        employee.setId(22);
         employee.setSalary(new Random().nextInt()*1000);
-        String jsonEmployee = objectMapper.writeValueAsString(employee);
-
-        mockMvc.perform(post(EMPLOYEES_URL).contentType(MediaType.APPLICATION_JSON).content(jsonEmployee)).andExpect(status().isOk());
-        mockMvc.perform(get(EMPLOYEES_URL+"/{id}/fullInfo").param("id", findId)).andExpect(jsonPath("$[0].id").);
+        String jsonEmployee =   objectMapper.writeValueAsString(employee);
+        mockMvc.perform(post(EMPLOYEES_URL).contentType(MediaType.APPLICATION_JSON).content(jsonEmployee)).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @SneakyThrows
     @Test
     void GetEmployeesTest(){
-        mockMvc.perform(get(EMPLOYEES_URL).andExpect(jsonPath());
+        mockMvc.perform(get(EMPLOYEES_URL)).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$").isArray());
+    }
+
+    @SneakyThrows
+    @Test
+    void findHighestTest(){
+        final int sal = 5000;
+        EmployeeFullInfo employee = new EmployeeFullInfo();
+        employee.setPositionName("test1");
+        employee.setSalary(sal);
+        EmployeeFullInfo employee2 = new EmployeeFullInfo();
+        employee.setPositionName("test2");
+        employee.setSalary(2000);
+
+        String jsonEmployee = objectMapper.writeValueAsString(employee);
+        String jsonEmployee2 = objectMapper.writeValueAsString(employee2);
+        mockMvc.perform(post(EMPLOYEES_URL).contentType(MediaType.APPLICATION_JSON).content(jsonEmployee)).andExpect(MockMvcResultMatchers.status().isOk());
+        mockMvc.perform(post(EMPLOYEES_URL).contentType(MediaType.APPLICATION_JSON).content(jsonEmployee2)).andExpect(MockMvcResultMatchers.status().isOk());
+        mockMvc.perform(get(EMPLOYEES_URL+"/withHighestSalary")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$[0].salary").isArray()).andExpect((ResultMatcher) MockMvcResultMatchers.jsonPath("$", jsonEmployee));
+    }
+
+    @SneakyThrows
+    @Test
+    void findByPage(){
+        final int fpage = 1;
+        mockMvc.perform(get(EMPLOYEES_URL+"/page").param("page", String.valueOf(fpage))).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$").isArray());
     }
 }
