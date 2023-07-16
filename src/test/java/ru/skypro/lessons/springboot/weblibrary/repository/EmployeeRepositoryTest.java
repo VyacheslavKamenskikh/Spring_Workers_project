@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibrary.entity.Employee;
+import ru.skypro.lessons.springboot.weblibrary.entity.Position;
 
 import java.util.List;
 import java.util.Random;
@@ -22,7 +23,7 @@ public class EmployeeRepositoryTest {
         List<EmployeeFullInfo> employeeList = employeeRepository.findByPos(targetPos);
         Assertions.assertTrue(employeeList.isEmpty());
         int expCount = 2;
-        List<EmployeeFullInfo> employeeListForSave = getEmployeeListForSave(expCount, targetPos);
+        List<Employee> employeeListForSave = getEmployeeListForSave(expCount, targetPos);
         employeeRepository.saveAll(employeeListForSave);
 
         employeeList =employeeRepository.findByPos(targetPos);
@@ -32,13 +33,12 @@ public class EmployeeRepositoryTest {
         employeeRepository.deleteAll(employeeListForSave);
     }
 
-    private List<EmployeeFullInfo> getEmployeeListForSave(int count, String pos){
-        List<EmployeeFullInfo> result = Stream.generate(()->
-                new EmployeeFullInfo()
-                        .setPositionName(pos)
-                        .setSalary(new Random().nextInt()*1000)
-                ).limit(count).toList();
-        result.stream().limit(count).forEach(employeeFullInfo -> employeeFullInfo.setPositionName("Test"));
+    private List<Employee> getEmployeeListForSave(int count, String pos){
+        List<Employee> result = Stream.generate(()->
+                         new Employee(new Position(pos), new Random().nextInt()*1000))
+                .limit(count*2)
+                .toList();
+        result.stream().limit(count).forEach(employee -> employee.setSalary(1));
         return result;
     }
 }

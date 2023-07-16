@@ -23,5 +23,26 @@ public class EmployeeFullInfo {
 
     }
 
+    public EmployeeFullInfo(String pos, int i) {
+        this.positionName = pos;
+        this.salary = i;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
+    }
+
+    public void setSalary(Integer salary) {
+        this.salary = salary;
+    }
+
     // Геттеры и сеттеры
 }

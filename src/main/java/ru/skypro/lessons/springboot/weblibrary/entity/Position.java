@@ -17,4 +17,7 @@ public class Position {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+
+    public Position(String pos) {
+    }
 }

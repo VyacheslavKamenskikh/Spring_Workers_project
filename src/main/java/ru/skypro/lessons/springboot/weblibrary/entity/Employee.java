@@ -20,4 +20,10 @@ public class Employee {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "position_id")
     private Position position;
+
+
+    public Employee(Position position, int i) {
+        this.position = position;
+        this.salary=i;
+    }
 }
