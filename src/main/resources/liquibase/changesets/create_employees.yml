@@ -1,0 +1,102 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Vyacheslav
+      changes:
+        - createTable:
+            tableName: position
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: Vyacheslav
+      changes:
+        - createTable:
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: salary
+                  type: int
+                  constraints:
+                    nullable: true
+              - column:
+                  name: last_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: position
+                  type: varchar(100)
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_position_employeesdata
+                    references: position(name)
+
+  - changeSet:
+      id: 3
+      author: Vyacheslav
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: enabled
+                  type: int
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 4
+      author: Vyacheslav
+      changes:
+        - createTable:
+            tableName: authorities
+            columns:
+              - column:
+                  name: username
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: authority
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: authorities_username_fkey
+                  type: int
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_users_authorities
+                    references: users(username)
